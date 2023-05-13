@@ -31,7 +31,7 @@ Assuming that the texts are stored within the working directory, in the subfolde
 text_files = list.files(path = "corpus")
 ```
 
-Before we discuss how to massively analyze all the texts from the subfolder `corpus`, let's take a breath and look at the NLP step alone, as applied to a single text. This is going to be the first text in the said subfolder, namely `act_1_g.txt` (the first chapter of the Acts). We read the text, and then we collapse all the paragraphs to one long string of words:
+Before we discuss how to massively analyze all the texts from the subfolder `corpus`, let's take a breath and look at the NLP step alone, as applied to a single text. This is going to be the first text in the said subfolder, namely `act.txt` (containing the Acts). We read the text, and then we collapse all the paragraphs to one long string of words:
 
 ``` {r}
 current_text = readLines("corpus/act.txt", encoding = "UTF-8")
@@ -71,7 +71,7 @@ Certainly, parts of speech can be accessed in a similar way, via `parsed_text$up
 parsed_text$lemma[parsed_text$upos == "PROPN"]
 ```
 
-At this point, two remarks need to be made. Firstly, some models were trained without taking into account proper nouns as a separate category. Consequently, they don't recognize named entities at all. E.g. if you use an alternative model for Ancient Greek, nemely `ancient_greek-perseus` (which is larger and generally much better than `ancient_greek-proiel`, by the way), then the word, say, Φιλίππος (Philippos) will be recognized as "NOUN" rather than "PROPN". Secondly, as the above list clearly suggests, the NER module returns wrong answers at times, e.g. the word τοῦτ is clearly misrecognized by the model.
+At this point, two remarks need to be made. Firstly, some models were trained without taking into account proper nouns as a separate category. Consequently, they don't recognize named entities at all. E.g. if you use an alternative model for Ancient Greek, nemely `ancient_greek-perseus` (which is larger and generally much better than `ancient_greek-proiel`, by the way), then the word, say, Φιλίππος (Philippos) will be recognized as `NOUN` rather than `PROPN`. Secondly, as the above list clearly suggests, the NER module returns wrong answers at times, e.g. the word τοῦτ is clearly misrecognized by the model.
 
 If it is possible to extract the proper nouns alone, then it is obviously also possible to get the lemmatized text _without_ the proper nouns, by replacing `==` (equals to) with `!=` (is different) in the snippet discussed above:
 
